@@ -4,50 +4,31 @@
 #include <cs50.h>
 #include <ctype.h>
 
-// encrypt a user-proved string via a key provided by parameter
+/* 
+*  encrypt a user-proved string via a key provided by parameter
+*/
+
+void encypher(int key, char origLetter);
 
 int main(int argc, string argv[])
 {
-    // get the key parameter and convert to int
-    int key = atoi(argv[1]);
-    int alphaIndex;
-    char cipherText;
-    
     if (argc != 2)
     {
         printf("Please run again with one key argument\n");
         return 1;
     }
-   
+    
+    // get the key parameter and convert to int
+    int key = atoi(argv[1]);
     string userString = GetString();
-        
-    // iterate over the userString, adding key to each char
-    // and printing
+
     for (int i = 0, n = strlen(userString); i < n; i++)
     {
-        // check if the char is a letter, then determine case
         if (isalpha(userString[i]))
-        {
-            if (isupper(userString[i]))
-            {
-                // letter - 'A' = alpha index (0)
-                alphaIndex = userString[i] - 'A';
-                cipherText = ((alphaIndex + key) % 26) + 'A'; 
-                printf("%c", cipherText);
-            }
-            else if (islower(userString[i]))
-            {
-                // letter - 'a' = alpha index (0)
-                alphaIndex = userString[i] - 'a';
-                cipherText = ((alphaIndex + key) % 26) + 'a'; 
-                printf("%c", cipherText);
-            }   
-        }
+            encypher(key, userString[i]);          
+
         else
-        {
             printf("%c", userString[i]);
-        } 
-        
     }
     
     printf("\n");
@@ -55,5 +36,22 @@ int main(int argc, string argv[])
     return 0;
 }
 
-char encypher()
+// given the key and original letter, convert to encyphered letter
+void encypher(int key, char origLetter)
+{
+    int alphaIndex;
+    char cipherText;
+    char ascIndex = 'a';
+    
+    if (isupper(origLetter))
+        ascIndex = toupper(ascIndex);
+    
+    // using the original letter and 'a' or 'A'
+    // get the alphabetical index
+    alphaIndex = origLetter - ascIndex;
+    
+    // convert back to ASCII & print
+    cipherText = ((alphaIndex + key) % 26) + ascIndex; 
+    printf("%c", cipherText);  
+}
 
