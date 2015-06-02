@@ -5,7 +5,7 @@
 #include <ctype.h>
 
 /* 
-*  encrypt a user-proved string via a key provided by parameter
+*  prompt user for text to encrypt via a key provided by parameter
 */
 
 void encypher(int key, char origLetter);
