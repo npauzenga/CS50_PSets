@@ -33,6 +33,11 @@
 // lives
 #define LIVES 3
 
+// Paddle dimensions and Y-position
+#define PADDLE_HEIGHT 10
+#define PADDLE_WIDTH 80
+#define PADDLE_YPOS HEIGHT - PADDLE_HEIGHT
+
 // prototypes
 void initBricks(GWindow window);
 GOval initBall(GWindow window);
@@ -73,7 +78,16 @@ int main(void)
     // keep playing until game over
     while (lives > 0 && bricks > 0)
     {
-        // TODO
+       GEvent event = getNextEvent(MOUSE_EVENT);
+       
+       if (event != NULL)
+       {
+            if (getEventType(event) == MOUSE_MOVED)
+            {
+                double x = getX(event) - getWidth(paddle) / 2;
+                setLocation(paddle, x, PADDLE_YPOS);
+            }
+       }
     }
 
     // wait for click before exiting
@@ -106,8 +120,14 @@ GOval initBall(GWindow window)
  */
 GRect initPaddle(GWindow window)
 {
-    // TODO
-    return NULL;
+    int paddleXpos = (WIDTH / 2) - (PADDLE_WIDTH / 2);
+    
+    GRect paddle = newGRect(paddleXpos, PADDLE_YPOS, PADDLE_WIDTH, PADDLE_HEIGHT);
+    setFilled(paddle, true);
+    setColor(paddle, "BLUE");
+    add(window, paddle);
+    
+    return paddle;
 }
 
 /**

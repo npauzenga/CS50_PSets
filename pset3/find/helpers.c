@@ -11,6 +11,37 @@
 
 #include "helpers.h"
 
+bool binary_search (int values[], int value, int upper, int lower)
+{
+        int middle = (lower + upper) / 2;
+        
+        if (lower > upper)
+            return false;
+        
+        if (values[middle] == value)
+            return true;
+     
+        else if (values[middle] > value)
+        {
+            //upper = middle - 1;
+            if (binary_search(values, value, (middle - 1), lower))
+            {
+                return true;
+            }
+        }
+
+        else if (values[middle] < value)
+        {
+            //lower = middle + 1;
+            if (binary_search(values, value, upper, (middle + 1)))
+            {
+                return true;
+            }
+        }  
+        
+        return false;    
+}
+
 
 /**
  * Returns true if value is in array of n values, else false.
@@ -19,27 +50,18 @@ bool search(int value, int values[], int n)
 {
     // implement a binary search that returns true
     // if value is in values, false if not or if n is not positive
-    // TODO redo with reursive implementation
+
     int lower = 0;
     int upper = n - 1;
     
-    while (lower <= upper)
+    if (n > 0)
     {
-        int middle = (lower + upper) / 2;
-        
-        if (values[middle] == value)
+        if (binary_search(values, value, upper, lower))
+        {
             return true;
-     
-        else if (values[middle] > value)
-        {
-            upper = middle - 1;
         }
-
-        else if (values[middle] < value)
-        {
-            lower = middle + 1;
-        }
-     }
+    }
+    
     return false;
 }
 
