@@ -1,0 +1,59 @@
+0.  GIF = 256 colors 
+    BMP = 256 - 16 million colors 
+    JPEG = 16 million colors 
+    PNG = 256 colors
+    
+1.  GIF pictures support animation
+
+2.  Lossless compression algorithms maintain a perfect copy of the 
+    original image with no degredation. Lossy compression comprimises 
+    the original image quality to some degree (but produce smaller files)
+    
+3.  JPEG is lossy-compressed
+
+4.  When a file is "deleted" in a FAT file system, only the header is removed.
+    The blocks of memory containing the file's data are not overwritten and may be
+    recoverable.
+    
+5.  One method of ensuring that files are not recoverable (without physically
+    destroying the disk) would be to overwrite that portion of memory with 0's
+    instead of simply removing the pointer to that chunk of space.
+    
+6.  stdint.h defines typedefs for intN_t, uintN_t, etc. These are 
+    signed or unsigned ints that are exactly N bits wide (i.e. int8_t is
+    precisely 8-bits wide).
+    
+7.  These types remove any "padding" bits so that when we can exactly represent
+    the bit-size of an object as a data type. for example: int8_t represents
+    exactly 8 bits of data, or 1 byte and will not vary across systems.
+    
+8.  In a 32-bit system, a BYTE is 1 byte, a DWORD is 4 bytes, a LONG is 4 bytes,
+    and a WORD is 2 bytes.
+    
+9.  "BM" in ASCII represents the first 2 bytes of a bitmap header. It identifies
+    the type of bitmap.
+    
+10. bfSize is the size, inbytes of the bitmap file. biSize is the number of bytes
+    required by the BITMAPINFOHEADER struct.
+    
+11. if biHeight in the BITMAPINFOHEADER is negative, the bitmap is arranged
+    top-down and it's origin is in the upper-left corner.
+    
+12. biBitCount represents the color depth or number of bits that represent
+    each pixel.
+    
+13. Outptr could potentially return NULL if there was an error or we were unable
+    to create outfile, potentially due to lack of memory.
+    
+14. The "1" param in fread() represents the count, or maximum number of items to be
+    read. As we are spefifying the size of the respective headers in the bmp,
+    we only want to read 1 of each.
+    
+15. padding = 3
+
+16. fseek() moves the file pointer to a specific location given the pointer
+    to a file, an offset from origin, and an intial position
+    
+17. SEEK_CUR is the current position of the pointer for fseek()
+
+18. It's that guy with small tiger cub. Maybe a cat.
