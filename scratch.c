@@ -1,8 +1,12 @@
 #include <stdio.h>
-#include "./pset4/bmp/bmp.h"
+
 
 int main(void)
 {
-    printf("%i",(4 - (3 * sizeof(RGBTRIPLE)) % 4) % 4);
-    return 0;
+    int jpgNumber = 0;
+    
+    char jpgTitle[8];
+    sprintf(jpgTitle, "%.*i.jpg", 3, jpgNumber);
+    printf("%s", jpgTitle);
+
 }
