@@ -56,4 +56,4 @@
     
 17. SEEK_CUR is the current position of the pointer for fseek()
 
-18. It's that guy with small tiger cub. Maybe a cat.
+18. It's that guy with small tiger. Maybe a cat.

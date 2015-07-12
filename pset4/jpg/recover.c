@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
-#include "jpg.h"
 
 /**
  * recover.c
@@ -11,6 +11,7 @@
  *
  * Recovers JPEGs from a forensic image.
  */
+typedef uint8_t  BYTE;
 
 int main(int argc, char* argv[])
 {
@@ -43,8 +44,9 @@ int main(int argc, char* argv[])
                 
                 // print the name of the file to jpgTitle and open an img
                 // with that name, then write buffer until new jpg is found
-                jpgNumber++;
+                
                 sprintf(jpgTitle, "%.*i.jpg", 3, jpgNumber);
+                jpgNumber++;
                 
                 img = fopen(jpgTitle, "w");
                 

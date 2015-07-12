@@ -71,7 +71,6 @@ int main(int argc, char* argv[])
     }
     
     // store originl header values
-    //int ObfSize = bf.bfSize;
     int ObiWidth = bi.biWidth;
     int ObiHeight = bi.biHeight;
     
