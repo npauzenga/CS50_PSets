@@ -18,9 +18,6 @@ int main(int argc, char* argv[])
     // open memory card file
     FILE* memCard = fopen("card.raw", "r");
     
-    // TODO allocate memory
-
- 
     // temp storage - array of type BYTE, 512 BYTES long
     char buffer[512];
     char jpgTitle[8];
@@ -62,8 +59,6 @@ int main(int argc, char* argv[])
     
     fclose(memCard);
     fclose(img);
-    
-    // TODO free memory
     
     return 0;
 
