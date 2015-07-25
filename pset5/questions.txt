@@ -1,0 +1,27 @@
+0.  "pneumonoultramicroscopicsilicovolcanoconiosis" is our 45-letter, max-length for words 
+    we intend to spell check.
+    
+1.  getrusage()will return metrics on system resources. If we call it using RUSAGE_SELF,
+    it will return stats on the calling process. It will output to the struct pointed to
+    by the second parameter
+    
+2.  There are 16 variable in the rusage struct
+
+3.  Do we pass in references to before and after (instead of values directly) for efficiency's
+    sake?
+    
+4.  main() uses fgetc, char by char until EOF is reached, the word is too long,
+    or a number is found. If any of those things happen, we finish scanning the line
+    and start a new word (using index to indicate whether we have completed a word or not).
+    Otherwise, the char is added to the word in progress. We then check if the word is finished,
+    and spell check it.
+    
+5.  One potential reason to use fgetc over fscanf would be that fscanf could consume
+    a word that is too long and therefor overflow our word[].
+
+6.  Const will prevent changes to the object pointed to. word and dictionary.
+
+7.  TODO
+8.  TODO
+9.  TODO
+10. TODO
