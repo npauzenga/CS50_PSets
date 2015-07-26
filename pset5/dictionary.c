@@ -60,20 +60,45 @@ bool load(const char* dictionary)
     node* hashTable[TABLE_SIZE];
     
     // temp storage for each word
-    char* wordBucket[LENGTH + 1];
+    char wordBucket[LENGTH + 1];
+    
+    // for each word's array index
+    int index;
+    
+    // initialize each element to a new node called head
+    for(i = 0, j = TABLE_SIZE; i < j; i++)
+    {
+        node* head = malloc(sizeof(node));
+        hashTable[i] = head
+        hashTable[i]->word = NULL;
+        hashTable[i]->next = NULL;
+    }
     
     // for every element in the dict, store to wordBucket
-    // TODO seg fault here
-    while(fscanf(dict, "%s", *wordBucket))
+    while(fscanf(dict, "%s", wordBucket)) //!= EOF?
     {
-        // grab space for a new node
+        // hash the word to get it's index
+        index = hash_function(new_node->word, TABLE_SIZE);
+        
+        // TODO if there's already a node at this index
+        // with a word not set to NULL, malloc a new node
+        // and assign the word to it
         node* new_node = malloc(sizeof(node));
         
-        strcpy(new_node->word, *wordBucket);
-
-        hashTable[hash_function(new_node->word, TABLE_SIZE)] = new_node;
+        // copy the string to the node
+        strcpy(new_node->word, wordBucket);
         
-        // count how many words have been added
+        
+        
+        // set the head node to point to this one
+        new_node->next = hashTable[index];
+        hashTable[index]->next = new_node
+
+        
+        //hash the word and insert into table
+        hashTable[index] = new_node;
+        
+        // TODO count how many words have been added
     }
 
     return true;
