@@ -15,10 +15,12 @@
 
 #include "dictionary.h"
 
-#define TABLE_SIZE 5
+#define TABLE_SIZE 100
 
+
+ 
 /**
- * Has function based on the first letter of string
+ * Hash function based on the first letter of string
  */
 int hash_function(char* key, const int SIZE)
 {
@@ -59,48 +61,55 @@ bool load(const char* dictionary)
     
     node* hashTable[TABLE_SIZE];
     
-    // temp storage for each word
-    char wordBucket[LENGTH + 1];
-    
     // for each word's array index
     int index;
     
+    // keep track of how many words are added
+    int wordCount = 0;
+    
     // initialize each element to a new node called head
-    for(i = 0, j = TABLE_SIZE; i < j; i++)
+    for(int i = 0, j = TABLE_SIZE; i < j; i++)
     {
         node* head = malloc(sizeof(node));
-        hashTable[i] = head
-        hashTable[i]->word = NULL;
-        hashTable[i]->next = NULL;
+        hashTable[i] = head;
     }
     
-    // for every element in the dict, store to wordBucket
-    while(fscanf(dict, "%s", wordBucket)) //!= EOF?
+
+    while(true) 
     {
+        // malloc a node for each new word
+        node* new_node = malloc(sizeof(node));
+        
+        // read the word into the node, if it's at the end, kill it
+        if(fscanf(dict, "%s", new_node->word) == EOF)
+        {
+            break;
+        }
+        
         // hash the word to get it's index
         index = hash_function(new_node->word, TABLE_SIZE);
         
-        // TODO if there's already a node at this index
-        // with a word not set to NULL, malloc a new node
-        // and assign the word to it
-        node* new_node = malloc(sizeof(node));
-        
-        // copy the string to the node
-        strcpy(new_node->word, wordBucket);
-        
-        
-        
-        // set the head node to point to this one
+        // put the address of the new_node into the table at index
         new_node->next = hashTable[index];
-        hashTable[index]->next = new_node
-
-        
-        //hash the word and insert into table
         hashTable[index] = new_node;
-        
-        // TODO count how many words have been added
-    }
 
+        
+        // count how many words have been added
+        wordCount += 1;
+    }
+    
+    // print table (for testing)
+    for(int i = 0, j = TABLE_SIZE; i <= j; i++)
+    {
+        node * current = hashTable[i];
+        
+        while (current != NULL)
+        {
+            printf("%s\n", current->word);
+            current = current->next;
+        }
+    }
+    
     return true;
 }
 
