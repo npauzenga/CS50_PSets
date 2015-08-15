@@ -21,7 +21,11 @@
 
 6.  Const will prevent changes to the object pointed to. word and dictionary.
 
-7.  TODO
-8.  TODO
-9.  TODO
-10. TODO
+7.  I used a hash table with separate chaining via linked-lists. 
+
+8.  .78 seconds on the Austin Power test.
+
+9.  Still need to figure out why the checker is dragging. Likely due to unsorted lists.
+
+10. It needs to be tuned and optimized further. Just getting the data structure to work was
+pretty big.

@@ -1,12 +1,19 @@
 #include <stdio.h>
+#include <ctype.h>
+#include <string.h>
 
 
 int main(void)
 {
-    int jpgNumber = 0;
+    char* word = "NaTe";
+    char lowerWord[strlen(word)];
     
-    char jpgTitle[8];
-    sprintf(jpgTitle, "%.*i.jpg", 3, jpgNumber);
-    printf("%s", jpgTitle);
+    for(int i = 0, j = strlen(word); i <= j; i ++)
+    {
+        lowerWord[i] = tolower(word[i]);
+    }
+    printf("%s", lowerWord);
+    
+    return 0;
 
 }

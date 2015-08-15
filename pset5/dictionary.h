@@ -15,6 +15,17 @@
 // maximum length for a word
 // (e.g., pneumonoultramicroscopicsilicovolcanoconiosis)
 #define LENGTH 45
+#define TABLE_SIZE 10
+
+// setup nodes for linked list and hash table
+typedef struct node
+{
+    char word[LENGTH + 1];
+    struct node* next; 
+}
+node;
+    
+node* hashTable[TABLE_SIZE];
 
 /**
  * Returns true if word is in dictionary else false.

@@ -15,8 +15,8 @@
 
 #include "dictionary.h"
 
-#define TABLE_SIZE 100
-
+// keep track of how many words are added
+int wordCount = 0;
 
  
 /**
@@ -33,7 +33,32 @@ int hash_function(char* key, const int SIZE)
  */
 bool check(const char* word)
 {
-    // TODO
+    int wordLength = strlen(word);
+    
+    // convert word to lowercase
+    char lowercaseWord[wordLength];
+    
+    for(int i = 0; i <= wordLength; i ++)
+    {
+        lowercaseWord[i] = tolower(word[i]);
+    }
+    
+    // hash the word to find it's index and put our cursor there
+    node* current = hashTable[hash_function(lowercaseWord, TABLE_SIZE)];
+    
+    // search the linked list at that index
+    while (current != NULL)
+    {
+        if (strcmp(lowercaseWord, current->word) == 0)
+        {
+            return true;
+        }
+        else
+        {
+            current = current->next;
+        }
+    }
+
     return false;
 }
 
@@ -50,22 +75,10 @@ bool load(const char* dictionary)
         printf("dictionary failed to open\n");
         return false;
     }
-    
-    // define node for linked list
-    typedef struct node
-    {
-        char word[LENGTH + 1];
-        struct node* next;
-    }
-    node;
-    
-    node* hashTable[TABLE_SIZE];
+
     
     // for each word's array index
     int index;
-    
-    // keep track of how many words are added
-    int wordCount = 0;
     
     // initialize each element to a new node called head
     for(int i = 0, j = TABLE_SIZE; i < j; i++)
@@ -83,6 +96,7 @@ bool load(const char* dictionary)
         // read the word into the node, if it's at the end, kill it
         if(fscanf(dict, "%s", new_node->word) == EOF)
         {
+            free(new_node);
             break;
         }
         
@@ -99,16 +113,16 @@ bool load(const char* dictionary)
     }
     
     // print table (for testing)
-    for(int i = 0, j = TABLE_SIZE; i <= j; i++)
-    {
-        node * current = hashTable[i];
-        
-        while (current != NULL)
-        {
-            printf("%s\n", current->word);
-            current = current->next;
-        }
-    }
+/*    for(int i = 0, j = TABLE_SIZE; i <= j; i++)*/
+/*    {*/
+/*        node * current = hashTable[i];*/
+/*        */
+/*        while (current != NULL)*/
+/*        {*/
+/*            printf("%s\n", current->word);*/
+/*            current = current->next;*/
+/*        }*/
+/*    }*/
     
     return true;
 }
@@ -118,8 +132,8 @@ bool load(const char* dictionary)
  */
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+
+    return wordCount;
 }
 
 /**
@@ -127,6 +141,17 @@ unsigned int size(void)
  */
 bool unload(void)
 {
-    // TODO
-    return false;
+    for(int i = 0; i <= TABLE_SIZE; i++)
+    {
+        node* cursor = hashTable[i];
+        
+        while (cursor != NULL)
+        {
+            node* temp = cursor;
+            cursor = cursor->next;
+            free(temp);
+        }
+    }
+    
+    return true;
 }
